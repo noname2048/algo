@@ -14,7 +14,7 @@ class Solution:
 
         if len(self.mutable_word_list) >= len(self.target_word):
             self.ans += 1
-            print(self.solve_list)
+            # print(self.solve_list)
             return
 
         for idx in range(curr_idx, len(self.origin_word)):
