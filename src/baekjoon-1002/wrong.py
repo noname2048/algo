@@ -16,7 +16,7 @@ def solution(x1, y1, r1, x2, y2, r2):
     elif dist < r:
         if dist + r1 < r2:
             return 0
-        elif dist + r1 == r2:
+        elif dist + r1 == r2 or dist + r2 == r1:
             return 1
         elif dist + r1 > r2:
             return 2
