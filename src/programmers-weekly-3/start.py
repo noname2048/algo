@@ -1,6 +1,9 @@
 from collections import deque
 
 
+debug = 1
+
+
 def solution(game_board, table):
     answer = -1
     return answer
@@ -54,6 +57,7 @@ def label_table(table):
                 label_count += 1
                 queue = deque()
                 queue.append([i, j])
+
                 while queue:
                     y, x = queue.popleft()
                     label[y][x] = label_count
@@ -69,7 +73,7 @@ def label_table(table):
                         ):
                             queue.append([ny, nx])
 
-    return table
+    return label
 
 
 def make_pretty_2d(matrix):
