@@ -18,7 +18,7 @@ def rotate_clockwise(symbol):
     return [list(ele) for ele in zip(*reversed(symbol))]
 
 
-game_borad = [
+game_board = [
     [1, 1, 0, 0, 1, 0],
     [0, 0, 1, 0, 1, 0],
     [0, 1, 1, 0, 0, 1],
@@ -44,15 +44,24 @@ dir_yx_pos = {
 }
 
 
-def label_table(table):
-    row = len(table)
-    col = len(table[0])
-    label = [[0 for _ in range(col)] for _ in range(row)]
+def make_pretty_2d(matrix):
+    # for str_list in matrix:
+    #   str_list = ["{:3}".format(item) for item in row]
+    #   new_row = " ".join(str_list)
+
+    return "\n".join(
+        [" ".join(["{:3}".format(item) for item in row]) for row in matrix]
+    )
+
+
+def label(board, target_idx=1):
+    row, col = len(board), len(board[0])
+    label = [[0] * col for _ in range(row)]
     label_count = 0
 
     for i in range(row):
         for j in range(col):
-            if label[i][j] == 0 and table[i][j] == 1:
+            if label[i][j] == 0 and board[i][j] == target_idx:
 
                 label_count += 1
                 queue = deque()
@@ -69,24 +78,21 @@ def label_table(table):
                             0 <= ny < row
                             and 0 <= nx < col
                             and label[ny][nx] == 0
-                            and table[ny][nx] == 1
+                            and board[ny][nx] == target_idx
                         ):
                             queue.append([ny, nx])
-
     return label
 
 
-def make_pretty_2d(matrix):
-    # for str_list in matrix:
-    #   str_list = ["{:3}".format(item) for item in row]
-    #   new_row = " ".join(str_list)
+labeled_board = label(game_board, 1)
+empty_space = label(game_board, 0)
+labeled_table = label(table, 1)
 
-    return "\n".join(
-        [" ".join(["{:3}".format(item) for item in row]) for row in matrix]
-    )
-
-
-labeled = label_table(table)
+print("board")
+print(make_pretty_2d(game_board), sep=None)
+print("labled_board")
+print(make_pretty_2d(labeled_board))
+print("empty_space")
+print(make_pretty_2d(empty_space))
+print("table")
 print(make_pretty_2d(table))
-print("---")
-print(make_pretty_2d(labeled))
