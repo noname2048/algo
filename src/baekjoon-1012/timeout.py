@@ -51,7 +51,7 @@ class DfsLabel:
         self.row = len(board)
         self.col = len(board[0])
         self.board = board
-        self.lable_board = [[0] * self.row for _ in range(self.col)]
+        self.lable_board = [[0] * self.col for _ in range(self.row)]
         self.label_cnt = 0
 
     def dfs(self, y, x):
@@ -74,7 +74,7 @@ class DfsLabel:
             for j in range(self.col):
                 if self.board[i][j] == 1 and self.lable_board[i][j] == 0:
                     self.label_cnt += 1
-                    self.dfs(y, x)
+                    self.dfs(i, j)
 
         return self.label_cnt
 
