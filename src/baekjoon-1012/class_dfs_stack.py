@@ -16,6 +16,8 @@ class DFSStack:
         self.label_cnt = 0
 
     def stack_dfs(self, y, x):
+        self.label_cnt += 1
+
         stack = []
         stack.append([y, x])
 
@@ -30,8 +32,8 @@ class DFSStack:
                 if (
                     0 <= next_y < self.row
                     and 0 <= next_x < self.col
-                    and self.board[y][x] == 1
-                    and self.labled_board[y][x] == 0
+                    and self.board[next_y][next_x] == 1
+                    and self.labled_board[next_y][next_x] == 0
                 ):
                     stack.append([next_y, next_x])
 
@@ -39,7 +41,6 @@ class DFSStack:
         for i in range(self.row):
             for j in range(self.col):
                 if self.board[i][j] == 1 and self.labled_board[i][j] == 0:
-                    self.label_cnt += 1
                     self.stack_dfs(i, j)
 
         return self.label_cnt
@@ -58,4 +59,6 @@ for testcase in range(int(input())):
 
     dfs_handler = DFSStack(board)
     print(dfs_handler.calc())
+    print(make_pretty_2d(dfs_handler.board))
+    print()
     print(make_pretty_2d(dfs_handler.labled_board))

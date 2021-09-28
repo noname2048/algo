@@ -1,1 +1,5 @@
+# logging for debug
 log.txt
+# pycache
+__pycache__
+*.pyc
