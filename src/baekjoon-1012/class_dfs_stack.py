@@ -1,6 +1,7 @@
 import sys
+from matrix_utils import make_pretty_2d
 
-sys.stdin = open("input2.txt", "r")
+sys.stdin = open("input.txt", "r")
 
 
 class DFSStack:
@@ -20,6 +21,7 @@ class DFSStack:
 
         while stack:
             ty, tx = stack.pop()
+            self.labled_board[ty][tx] = self.label_cnt
 
             for idx in [3, 2, 1, 0]:
                 next_y = ty + self.dy[idx]
@@ -56,3 +58,4 @@ for testcase in range(int(input())):
 
     dfs_handler = DFSStack(board)
     print(dfs_handler.calc())
+    print(make_pretty_2d(dfs_handler.labled_board))
