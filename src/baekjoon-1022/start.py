@@ -15,8 +15,8 @@ class Dir(Enum):
 
 dir_pos = [[0, 1], [-1, 0], [0, -1], [1, 0]]
 
-r1, c1, r2, c2 = map(int, input().split())
-# r1, c1, r2, c2 = [-3, -3, 3, 3]
+# r1, c1, r2, c2 = map(int, input().split())
+r1, c1, r2, c2 = [-7, -7, 7, 7]
 # r1, c1, r2, c2 = [-3, -3, 2, 0]
 r_size = r2 - r1 + 1
 c_size = c2 - c1 + 1
