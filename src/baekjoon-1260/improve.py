@@ -1,7 +1,3 @@
-# import sys
-
-# sys.stdin = open("input2.txt", "r")
-
 from collections import deque
 
 n, m, v = map(int, input().split())
@@ -11,50 +7,45 @@ for _ in range(m):
     node[a].append(b)
     node[b].append(a)
 
+for ele in node:
+    ele.sort(reverse=True)  # DESC
+
 
 def dfs():
-    global node
-
-    visited = {}
+    visited = [0 for _ in range(n + 1)]
     path = []
     stack = [v]
 
     while stack:
         curr = stack.pop()
-        if curr not in visited:
+        if not visited[curr]:
             visited[curr] = 1
             path.append(curr)
 
-            node[curr].sort(reverse=True)  # DESC
             for next in node[curr]:
-                if next not in visited:
+                if not visited[next]:
                     stack.append(next)
 
     return path
 
 
 def bfs():
-    global node
-
-    visited = {}
+    visited = [0 for _ in range(n + 1)]
     path = []
     queue = deque([v])
 
     while queue:
         curr = queue.popleft()
-        if curr not in visited:
+        if not visited[curr]:
             visited[curr] = 1
             path.append(curr)
 
-            node[curr].sort()  # ASC
-            for next in node[curr]:
-                if next not in visited:
+            for next in reversed(node[curr]):
+                if next in node[curr]:
                     queue.append(next)
 
     return path
 
 
-ans = dfs()
-print(" ".join(map(str, ans)))
-ans = bfs()
-print(" ".join(map(str, ans)))
+print(" ".join(map(str, dfs())))
+print(" ".join(map(str, bfs())))
