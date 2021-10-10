@@ -4,6 +4,7 @@ def solution(table):
         if (i + 1) == table[i]:
             return -1
 
+    """
     rotate = [ele for ele in table]
     for ans in range(2, 2 * 10 ** 9 + 1):
         rotate = [table[i - 1] for i in rotate]
@@ -13,6 +14,9 @@ def solution(table):
             return ans
 
     return -1
+    """
+
+    return 10 ** 9 + 7
 
 
 n = input()
