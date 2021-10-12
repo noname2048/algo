@@ -1,15 +1,21 @@
+import sys
+
+sys.stdin = open("input1.txt")
+
 n = int(input())
-a_list = [0] * n
-b_list = [0] * n
+a_list = []
+b_list = []
 
 for i in range(n):
-    a_list[i], b_list[i] = map(int, input().split())
+    a, b = map(int, input().split())
+    a_list.append(a)
+    b_list.append(b)
 
     a_list.sort()
     b_list.sort()
     b_list.reverse()
 
     g_max = 0
-    for i in range(n):
-        g_max = max(a_list[i] + b_list[i], g_max)
-        print(g_max)
+    for j in range(i + 1):
+        g_max = max(a_list[j] + b_list[j], g_max)
+    print(g_max)
