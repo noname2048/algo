@@ -12,3 +12,10 @@
     - python이 안되길래 cpp 로 idea를 구현. 시간초과.
 
 여기까지 보면 다른 방법이 있는거 같은데...
+
+1. why-not-improve.cpp (92ms)
+    - 다른사람 해설보고 어렴풋이 중복에 대한 처리도 중요하다고 깨달음
+1. return_to_python.py (776ms)
+    - why-not-inprove를 보고 python으로 옮겨옴. pypy3만 되고 python은 안됨
+
+언어간 차이가 정말 많이 난다.
