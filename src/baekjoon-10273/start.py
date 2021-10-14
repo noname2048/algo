@@ -17,7 +17,7 @@ def dfs(here, cost, path):
 
         if global_max_cost < cost:
             global_max_cost = cost
-            global_cache_path = path
+            global_cache_path = [ele for ele in path]
             # log.write(f"star\n")     
 
         for next, develope_cost in edge[here]:
