@@ -6,3 +6,7 @@ __pycache__
 
 ## baekjoon 1929 (sosu, prime number list)
 src/baekjoon-1929/a.txt
+
+# cpp
+*.exe
+.vscode
