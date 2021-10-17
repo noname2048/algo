@@ -1,3 +1,4 @@
+# pypy3(504ms) python3 시간초과 (다른 분 통과한 코드가 5000ms 정도)
 from math import gcd, factorial
 
 # debug = True
@@ -38,10 +39,10 @@ for i in range(1, 51):
 
 def re(state, remain):
     # 상태가 bin(1111) 일때
-    # bin(0111)[0~k] bin(1011)[0~k] bin(1101)[0~k] bin(1110)[0~k] 을 호출하는 재귀함수
+    # bin(0111)[0~k) bin(1011)[0~k) bin(1101)[0~k) bin(1110)[0~k) 을 호출하는 재귀함수
     # 즉 현재 상태보나 낮은 상태값을 재귀로 호출한다
     # "dp[상태][나머지] = 존재 할 수 있는 순열 수"를 참조
-    # dp[0][아무거나] = 0
+    # dp_cache[한개만 쓴 상태][모든경우]  = 0 or 1 로 초기화 되어있다.
 
     if dp_cache[state][remain] != -1:
         # if debug:
