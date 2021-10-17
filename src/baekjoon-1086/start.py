@@ -1,6 +1,8 @@
 from itertools import permutations
 import math
+import sys
 
+sys.stdin = open("custom3.txt", "r")
 n = int(input())
 num_list = [""] * n
 for i in range(n):
@@ -15,6 +17,8 @@ for ele in cand:
     l += 1
     if int(ele) % k == 0:
         ans += 1
-
-gcd = math.gcd(ans, l)
-print(f"{ans // gcd}/{l // gcd}")
+if ans == 0:
+    print("0/1")
+else:
+    gcd = math.gcd(ans, l)
+    print(f"{ans // gcd}/{l // gcd}")

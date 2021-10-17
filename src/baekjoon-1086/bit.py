@@ -1,12 +1,12 @@
-from math import gcd
+from math import gcd, factorial
 
 # debug = True
 # if debug:
 #     import sys
 #     import logging
 
-#     sys.stdin = open("input1.txt", "r")
-#     logging.basicConfig(filename="log.txt", filemode="w", level=logging.DEBUG)
+#     sys.stdin = open("custom3.txt", "r")
+# logging.basicConfig(filename="log.txt", filemode="w", level=logging.DEBUG)
 
 # 문제 제시 조건 n[1, 15], nums(n개), k[1, 100]
 n = int(input())
@@ -65,13 +65,13 @@ def re(state, remain):
                 # 점화식
                 # (abc * 100 + de) % k
                 # (abc % k) * (100 % k) + de % k
-                # (x % k) * y + z
-                x = re(last_state, candidated_remains)
+                # x * y + z
+                x = candidated_remains
                 y = digit_cache[e]
                 z = remainder_cache[included_number]
 
-                next_reamin = ((x % k) * y + z) % k
-                dp_cache[state][next_reamin] += x
+                next_reamin = (x * y + z) % k
+                dp_cache[state][next_reamin] += re(last_state, candidated_remains)
 
     # if debug:
     # logging.debug(f"close - re({state}, {remain}) = {dp_cache[state][remain]}")
@@ -82,5 +82,8 @@ def re(state, remain):
 ans_state = pow(2, n) - 1
 ans = re(ans_state, 0)
 total = sum(dp_cache[ans_state])
-g = gcd(ans, total)
-print(f"{int(ans/g)}/{int(total/g)}")
+if ans == 0:
+    print("0/1")
+else:
+    g = gcd(ans, total)
+    print(f"{int(ans/g)}/{int(total/g)}")
