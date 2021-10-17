@@ -7,12 +7,14 @@ for i in range(n):
     num_list[i] = str(input())
 k = int(input())
 
-[*candidate] = map("".join, permutations(num_list))
+cand = map("".join, permutations(num_list))
+
 ans = 0
-for ele in candidate:
+l = 0
+for ele in cand:
+    l += 1
     if int(ele) % k == 0:
         ans += 1
 
-l = len(candidate)
 gcd = math.gcd(ans, l)
 print(f"{ans // gcd}/{l // gcd}")
