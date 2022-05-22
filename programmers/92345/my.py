@@ -14,7 +14,8 @@ POS = [
 
 
 def move(idx, target):
-    newpos = target.copy()
+    newpos = [0, 0]
+    newpos[0], newpos[1] = target[0], target[1]
     newpos[0] += POS[idx][0]
     newpos[1] += POS[idx][1]
     return newpos
