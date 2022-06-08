@@ -1,4 +1,5 @@
 # 메뉴 리뉴얼
+# 문제를 잘못 이해하여 잘못된 풀이
 from collections import defaultdict
 
 
