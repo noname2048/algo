@@ -3,7 +3,13 @@ items = [1, 2, 3, 4, 5, 6, 7]
 
 
 def combination(items, k):
-    # items에서 순서상관없이 k개를 뽑는 모든 경우를 반환하는 함수
+    """items에서 순서상관없이 k개를 뽑는 모든 경우를 반환하는 함수
+
+    :param items:
+        중복되지 않는 원소들이 담긴 리스트(배열)
+    :param k:
+        중복되지 않게 뽑을 원소의 수(int)
+    """
     ans = []
     n = len(items)
 
@@ -28,7 +34,7 @@ print(ans)
 
 
 def permutation(items, k):
-    """items의 원소에서 k개를 뽑는 모든 집합을 반환하는 함수"""
+    """items의 원소에서 순서를 고려하여 k개를 뽑는 모든 집합을 반환하는 함수"""
     ans = []
     n = len(items)
     used = [False for _ in range(n)]
