@@ -1,6 +1,9 @@
 from collections import defaultdict
 import math
+import sys
 import heapq
+
+input = sys.stdin.readline
 
 DIR = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
