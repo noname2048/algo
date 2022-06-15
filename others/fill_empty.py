@@ -7,6 +7,11 @@ k = 100
 arr = [10, 1000]
 k = 900
 
+# 제안했던 테스트
+# 1. arr가 빈칸이면?
+# 2. 빽빽한 arr + k
+# 3. 빈칸 수보다 작은 k
+# 4. 빈칸 수보다 큰 k
 
 def solution(arr, k):
     empty_number_count = arr[-1] - len(arr)
