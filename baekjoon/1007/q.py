@@ -21,7 +21,7 @@ def get_custom_input():
         yield next(s_iter)
 
     k = my_gen()
-    return my_gen()
+    return k
 
 
 # input = sys.stdin.readline
