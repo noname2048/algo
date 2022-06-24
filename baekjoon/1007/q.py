@@ -5,23 +5,22 @@ import math
 
 
 def get_custom_input():
-    s = """2
-4
-5 5
-5 -5
--5 5
--5 -5
-2
--100000 -100000
-100000 100000
-"""
-    s_iter = iter(s.splitlines())
+    with open("./data.txt", "r") as f:
+        lines = f.readlines()
+        lines = map(lambda s: s.strip(), lines)
 
     def my_gen():
-        yield next(s_iter)
+        with open("data.txt", "r") as f:
+            lines = f.readlines()
+        yield from lines
 
-    k = my_gen()
-    return k
+    gen = my_gen()
+
+    def my_iter():
+        nonlocal gen
+        return next(gen)
+
+    return my_iter
 
 
 # input = sys.stdin.readline
@@ -54,6 +53,8 @@ def solution(n: int, vectors: List[Tuple[int]]) -> float:
         used[local_min_idx] = True
 
         return dfs() + local_min
+
+    return dfs()
 
 
 if __name__ == "__main__":
