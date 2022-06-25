@@ -34,10 +34,10 @@ d = timeit.timeit("ans = make_pairs_d(100)", globals=globals())
 print(a, b, c, d)
 
 # 결과
-# a 20.993
-# b 30.639
-# c 23.062
-# d 27.731
+# a 20.993, append, tupple #21
+# b 30.639, modify, list #28
+# c 23.062, +=, list #23
+# d 27.731, append, list #22
 
 # 이상하게도 리스트를 append 하는 것 보다,
 # 만들어두고 수정을 하는게 더 오래 걸렸다.
