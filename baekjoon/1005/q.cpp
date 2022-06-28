@@ -41,7 +41,7 @@ int main() {
 
     cin >> testcase; 
     for (int i = 0; i < testcase; i++) {
-        fill_n(cache, 10001, -1);
+        fill_n(cache, 1001, -1);
         m.clear();
         cin >> n >> k;
         for (int j = 0; j < n; j++) {
