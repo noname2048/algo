@@ -10,7 +10,7 @@ def pre_data():
     from pathlib import Path
 
     dir = Path(__file__).parent
-    with open(dir / "data.txt", "r") as f:
+    with open(dir / "data2.txt", "r") as f:
         txt = f.readlines()
 
     def gen():
@@ -43,10 +43,12 @@ def solve():
         # no parents
         if not graph[idx]:
             cache[idx] = d[idx]
+            print(f"idx{idx}: {cache[idx]}")
             return cache[idx]
         # have parents
         values = [recursion(parent) for parent in graph[idx]]
         cache[idx] = max(values) + d[idx]
+        print(f"idx{idx}: {cache[idx]}")
         return cache[idx]
 
     for _ in range(tc):
