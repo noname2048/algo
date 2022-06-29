@@ -10,3 +10,9 @@ src/baekjoon-1929/a.txt
 # cpp
 *.exe
 .vscode
+*.out
+*
+!*.*
+
+# vscode
+.vscode

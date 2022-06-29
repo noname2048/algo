@@ -3,6 +3,36 @@
 -   알고리즘 문제 풀이 코드 조각 모음
 -   푼것들 코드를 모아보자는 취지에서 작성
 
+## Commit convention
+
+`[emoji]types: <platform>(<problem_id>) <action>`
+
+### **commit types** from [link](https://github.com/pvdlg/conventional-commit-types)
+
+| Commit Type | Title                    | Description                                                                                                 | Emoji  |
+| ----------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- |:------:|
+| `feat`      | Features                 | A new feature                                                                                               | ✨     |
+| `fix`       | Bug Fixes                | A bug Fix                                                                                                   | 🐛     |
+| `docs`      | Documentation            | Documentation only changes                                                                                  | 📚     |
+| `style`     | Styles                   | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)      | 💎     |
+| `refactor`  | Code Refactoring         | A code change that neither fixes a bug nor adds a feature                                                   | 📦     |
+| `perf`      | Performance Improvements | A code change that improves performance                                                                     | 🚀     |
+| `test`      | Tests                    | Adding missing tests or correcting existing tests                                                           | 🚨     |
+| `build`     | Builds                   | Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)         | 🛠     |
+| `ci`        | Continuous Integrations  | Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) | ⚙️     |
+| `chore`     | Chores                   | Other changes that don't modify src or test files                                                           | ♻️     |
+| `revert`    | Reverts                  | Reverts a previous commit                                                                                   | 🗑     |
+
+
+### platforms
+
+programmers, baekjoon, leetcode
+
+### actions
+
+try, solve, timeout, wrong
+
+
 ## 문제풀이
 
 | 날짜   | 플랫폼       | 식별가능코드       | 난이도    | 문제이름                     | 비고                           | 분류        |
@@ -27,4 +57,6 @@
 | 211012 | 백준         | 2923               | 플래티넘5 | 숫자게임                     | (코드 최적화, 중복최대한 제거) | pypy        |
 | 211014 | 백준         | 10273              | 플래티넘5 | 고대 동굴 탐사               | 트리 DP                        | pypy        |
 | 211016 | 백준         | 1086               | 플래티넘5 | 박성원                       | 비트마스킹 DP                  | pypy        |
-| 211025 | 프로그래머스 | 위클리12 | 레벨2 | 피로도 | 순열, dps | 쉬웁
+| 211025 | 프로그래머스 | 위클리12           | 레벨2     | 피로도                       | 순열, dps                      | 쉬웁        |
+
+이후 업데이트는 생략됨 (은행방식)
