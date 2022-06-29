@@ -11,8 +11,6 @@ src/baekjoon-1929/a.txt
 *.exe
 .vscode
 *.out
-*
-!*.*
 
 # vscode
 .vscode
