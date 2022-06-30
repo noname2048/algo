@@ -6,10 +6,11 @@ def freopen():
     def make_generator():
         s = map(
             lambda x: x.strip(),
-            """3
+            """4
             10010111
             011000100110001
             0110001011001
+            100110001
             """.splitlines(),
         )
         yield from s
@@ -27,7 +28,7 @@ input = freopen()
 
 
 def solve():
-    pattern = re.compile(r"(100+1+|01)+")
+    pattern = re.compile(r"(100+?1+?|01)+")
     testcase = int(input())
     for _ in range(testcase):
         wave = input().strip()
