@@ -13,7 +13,7 @@ int cache[1001];
 map<int, set<int>> m;
 
 int recursion(int idx) {
-    if (cache[idx] > 0) return cache[idx];
+    if (cache[idx] >= 0) return cache[idx];
 
     if (m.find(idx) == m.end()) {
         cache[idx] = duration[idx];

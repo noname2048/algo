@@ -38,7 +38,7 @@ def solve():
 
     def recursion(idx):
         nonlocal cache, graph, d
-        if cache[idx] > 0:
+        if cache[idx] >= 0:
             return cache[idx]
         # no parents
         if not graph[idx]:
