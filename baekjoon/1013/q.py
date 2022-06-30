@@ -28,12 +28,12 @@ input = freopen()
 
 
 def solve():
-    pattern = re.compile(r"(100+?1+?|01)+")
+    pattern = re.compile(r"^(100+?1+?|01)+$")
     testcase = int(input())
     for _ in range(testcase):
         wave = input().strip()
         match = pattern.match(wave)
-        if match and match.start() == 0 and match.end() == len(wave):
+        if match:
             print("YES")
         else:
             print("NO")
