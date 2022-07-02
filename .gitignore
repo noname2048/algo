@@ -14,3 +14,6 @@ src/baekjoon-1929/a.txt
 
 # vscode
 .vscode
+
+# clang debug info
+*.dSYM
