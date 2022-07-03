@@ -13,7 +13,7 @@ def solve():
     while square_num <= mx:
 
         q, r = divmod(square_num, mn)
-        mi = square_num * q if mn == 0 else square_num * (q + 1)
+        mi = square_num * q if r == 0 else square_num * (q + 1)
 
         while mi <= mx:
             numbers.add(mi)
