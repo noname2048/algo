@@ -2,24 +2,23 @@
 #include <vector>
 using namespace std;
 
-int mn, mx;
-vector<long long> doubles;
+typedef unsigned long long int64;
+int64 mn = 1, mx = 1e12;
+vector<int64> square;
 
 int main(int argc, char *argv[]) {
     ios::sync_with_stdio(false);
-    // cout.tie(NULL);
-    cin.tie(NULL);
 
     cin >> mn >> mx;
-    for (long long i = 2; i * i <= mx; i++) {
-        doubles.push_back(i * i);
-    }
-    int cnt = 0;
-    for (long long num = mn; num <= mx; num++) {
+    for (int64 i = 2, tmp = i * i; tmp < mx; i++) square.push_back(tmp);
+
+    int64 cnt = 0;
+    for (int64 num = mn; num <= mx; num++) {
         bool isDoubleNum = false;
-        for (long long double_idx = 0; doubles[double_idx] <= num && double_idx < doubles.size(); double_idx++) {
-            int target = doubles[double_idx];
-            if (num % target == 0) {
+        // 순회하면서 체크하기
+        for (int64 idx = 0; idx < square.size() && square[idx] <= num; idx++) {
+            int64 tmp = square[idx];
+            if (num % tmp == 0) {
                 isDoubleNum = true;
                 break;
             }
