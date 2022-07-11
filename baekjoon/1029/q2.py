@@ -14,7 +14,7 @@ def solve():
     # cache[node_index][visit_state][value]
     cache = [[[-1] * 10 for _ in range(bit_index)] for _ in range(15)]
 
-    def re(here, visit, value) -> int:
+    def re(here, visit, value) -> int:  # get_max_people
         """방문한 곳, 현재 idx, 현재 가격을 통해 방문자 수를 리턴합니다."""
         if cache[here][visit][value] >= 0:
             return cache[here][visit][value]
