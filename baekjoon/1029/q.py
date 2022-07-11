@@ -21,8 +21,6 @@ def solve():
                 visited[idx] = False
         return max(arr) + 1
 
-        visited[index] = True
-
     visited = [False] * n
     visited[0] = True
     ans = re(0, visited, 0)
