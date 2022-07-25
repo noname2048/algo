@@ -31,16 +31,16 @@ input = stdin.readline
 input = preload()
 
 
+# 이코드는 다른사람에 비해 4배정도 더 걸립니다.
 def solve():
     tc = int(input())
     q = []
     for _ in range(tc):
         left, height, right = map(int, input().split())
-        heapq.heappush(q, (left, height, 1, right))
+        heapq.heappush(q, (left, height, 1))
         heapq.heappush(q, (right, height, -1))
 
     sky = 0
-    last_changed_sky_idx = -1
     tree = [0]
     ans = []
     while q:
@@ -58,11 +58,7 @@ def solve():
         tmp = tree[-1]
         if tmp != sky:
             sky = tmp
-            if last_changed_sky_idx == item[0]:
-                ans[-1][1] = sky
-            else:
-                last_changed_sky_idx = item[0]
-                ans.append([item[0], sky])
+            ans.append([item[0], sky])
 
     print(" ".join(f"{a} {b}" for a, b in ans))
     # 1 11 3 13 9 0 12 7 16 3 19 18 22 3 23 13 29 0
