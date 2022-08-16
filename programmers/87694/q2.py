@@ -3,7 +3,7 @@
 주말 8월 13일 Jun의 집에서
 """
 from enum import IntEnum
-from re import L
+from collections import deque
 
 
 class D(IntEnum):
@@ -21,9 +21,9 @@ class CW(IntEnum):
 dir_x = [0, 1, 0, -1]
 dir_y = [1, 0, -1, 0]
 
-board = [[0] * 51 for _ in range(51)]
-outline_board = [[0] * 51 for _ in range(51)]
-visited = [[0] * 51 for _ in range(51)]
+board = [[0] * 52 for _ in range(51)]  # 0 to 51
+outline_board = [[0] * 52 for _ in range(51)]
+visited = [[0] * 52 for _ in range(51)]
 
 
 def mark_outline(here_x, here_y, prev_dir, stop_x, stop_y):
@@ -51,29 +51,28 @@ def mark_outline(here_x, here_y, prev_dir, stop_x, stop_y):
 def bfs(here_x, here_y, stop_x, stop_y):
     global board, outline_board, visited
 
-    q = []
+    q = deque()
     q.append([here_x, here_y, 0])
     visited[here_y][here_x] = 1
 
     while q:
-        for i in range(0):
-            
+        here_x, here_y, dist = q.popleft()
+        if here_x == stop_x and here_y == stop_y:
+            return dist
 
+        for i in range(4):
+            next_x = here_x + dir_x[i]
+            next_y = here_y + dir_y[i]
 
-    if here_x == stop_x and here_y == stop_y:
-        return 0
-
-    visited[here_y][here_x] = 1
-
-    ret = []
-    for next_dir in range(4):
-        next_x = here_x + dir_x[next_dir]
-        next_y = here_y + dir_y[next_dir]
-
-        if outline_board[next_y][next_x] == 1 and visited[next_y][next_x] == 0:
-            ret.append(1 + bfs(next_x, next_y, stop_x, stop_y))
-
-    return min(ret)
+            if outline_board[next_y][next_y] == 1 and visited[next_y][next_x] == 0:
+                visited[next_y][next_x] = 1
+                q.append(
+                    [
+                        next_x,
+                        next_y,
+                        dist + 1,
+                    ]
+                )
 
 
 def solution(rectangle, characterX, characterY, itemX, itemY):
