@@ -21,9 +21,9 @@ class CW(IntEnum):
 dir_x = [0, 1, 0, -1]
 dir_y = [1, 0, -1, 0]
 
-board = [[0] * 50 for _ in range(51)]
-outline_board = [[0] * 50 for _ in range(51)]
-visited = [[0] * 50 for _ in range(51)]
+board = [[0] * 51 for _ in range(51)]
+outline_board = [[0] * 51 for _ in range(51)]
+visited = [[0] * 51 for _ in range(51)]
 
 
 def mark_outline(here_x, here_y, prev_dir, stop_x, stop_y):
@@ -34,7 +34,7 @@ def mark_outline(here_x, here_y, prev_dir, stop_x, stop_y):
         # mark
         outline_board[here_y][here_x] = 1
         # find cand
-        for dir_change in range(-1, 1 + 1):
+        for dir_change in range(-1, 2):
             next_dir = (prev_dir + dir_change) % 4
             next_x, next_y = here_x + dir_x[next_dir], here_y + dir_y[next_dir]
 
@@ -43,10 +43,22 @@ def mark_outline(here_x, here_y, prev_dir, stop_x, stop_y):
                 here_y = next_y
                 prev_dir = next_dir
                 break
+        else:
+            # cannot find cand
+            break
 
 
 def bfs(here_x, here_y, stop_x, stop_y):
     global board, outline_board, visited
+
+    q = []
+    q.append([here_x, here_y, 0])
+    visited[here_y][here_x] = 1
+
+    while q:
+        for i in range(0):
+            
+
 
     if here_x == stop_x and here_y == stop_y:
         return 0
@@ -144,8 +156,35 @@ def test_5():
     print(ans, 10)
 
 
-test_1()
-test_2()
-test_3()
-test_4()
-test_5()
+def test_6():
+    rectangle = [[1, 1, 4, 4], [2, 2, 5, 5], [3, 3, 7, 8]]
+    characterX = 1
+    characterY = 1
+    itemX = 5
+    itemY = 3
+
+    ans = solution(rectangle, characterX, characterY, itemX, itemY)
+    print(ans, 6)
+
+
+def test_7():
+    rectangle, characterX, characterY, itemX, itemY, a = (
+        [[2, 1, 3, 6], [4, 1, 5, 6], [1, 2, 6, 3], [1, 4, 6, 5]],
+        3,
+        2,
+        5,
+        4,
+        8,
+    )
+
+    ans = solution(rectangle, characterX, characterY, itemX, itemY)
+    print(ans, a)
+
+
+# test_1()
+# test_2()
+# test_3()
+# test_4()
+# test_5()
+# test_6()
+test_7()

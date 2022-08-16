@@ -174,8 +174,40 @@ def test_5():
     print(ans, 10)
 
 
-test_1()
-test_2()
-test_3()
-test_4()
-test_5()
+def test_6():
+    rectangle = [[1, 1, 4, 4], [2, 2, 5, 5], [3, 3, 7, 8]]
+    characterX = 1
+    characterY = 1
+    itemX = 5
+    itemY = 3
+
+    ans = solution(rectangle, characterX, characterY, itemX, itemY)
+    print(ans, 6)
+
+
+def test_7():
+    rectangle, characterX, characterY, itemX, itemY, a = (
+        [[2, 1, 3, 6], [4, 1, 5, 6], [1, 2, 6, 3], [1, 4, 6, 5]],
+        3,
+        2,
+        5,
+        4,
+        8,
+    )
+
+    ans = solution(rectangle, characterX, characterY, itemX, itemY)
+    print(ans, a)
+
+
+# test_1()
+# test_2()
+# test_3()
+# test_4()
+# test_5()
+# test_6()
+test_7()
+
+"""
+두개의 변이 만나는 곳에서 시작할때 문제가 있음
+이 방식은 기억자의 외부에 있는 경우, 기억자인데 내부에서 시작하는 경우를 처리할 수 없음
+"""
