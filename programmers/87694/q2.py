@@ -21,9 +21,9 @@ class CW(IntEnum):
 dir_x = [0, 1, 0, -1]
 dir_y = [1, 0, -1, 0]
 
-board = [[0] * 52 for _ in range(51)]  # 0 to 51
-outline_board = [[0] * 52 for _ in range(51)]
-visited = [[0] * 52 for _ in range(51)]
+board = [[0] * 52 for _ in range(52)]  # 0 to 51
+outline_board = [[0] * 52 for _ in range(52)]
+visited = [[0] * 52 for _ in range(52)]
 
 
 def mark_outline(here_x, here_y, prev_dir, stop_x, stop_y):
@@ -57,6 +57,7 @@ def bfs(here_x, here_y, stop_x, stop_y):
 
     while q:
         here_x, here_y, dist = q.popleft()
+        print(here_x, here_y)
         if here_x == stop_x and here_y == stop_y:
             return dist
 
@@ -64,7 +65,7 @@ def bfs(here_x, here_y, stop_x, stop_y):
             next_x = here_x + dir_x[i]
             next_y = here_y + dir_y[i]
 
-            if outline_board[next_y][next_y] == 1 and visited[next_y][next_x] == 0:
+            if outline_board[next_y][next_x] == 1 and visited[next_y][next_x] == 0:
                 visited[next_y][next_x] = 1
                 q.append(
                     [
