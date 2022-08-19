@@ -3,6 +3,9 @@
 # q3: 좌표 2배하기
 from collections import deque
 
+dir_y = [1, 0, -1, 0]
+dir_x = [0, 1, 0, -1]
+
 K = 52 * 2
 board = [[0] * K for _ in range(K)]
 outlint_board = [[0] * K for _ in range(K)]
@@ -30,8 +33,9 @@ def solution(rectangle, characterX, characterY, itemX, itemY):
     q = deque()
     q.append([characterY * 2, characterX * 2])
     here_x, here_y, prev_dir = (
-        characterX,
-        characterY,
+        characterX * 2,
+        characterY * 2,
+        0,
     )
 
 
