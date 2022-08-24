@@ -3,27 +3,28 @@
 # q3: 좌표 2배하기
 from collections import deque
 
-dir_y = [1, 0, -1, 0]
-dir_x = [0, 1, 0, -1]
-
-K = 52 * 2
-board = [[0] * K for _ in range(K)]
-outlint_board = [[0] * K for _ in range(K)]
-visited = [[0] * K for _ in range(K)]
-
 
 def solution(rectangle, characterX, characterY, itemX, itemY):
+
+    dir_y = [1, 0, -1, 0]
+    dir_x = [0, 1, 0, -1]
+
+    K = 52 * 2
+    board = [[0] * K for _ in range(K)]
+    outline_board = [[0] * K for _ in range(K)]
+    visited = [[0] * K for _ in range(K)]
+
     ldy, ldx = 1000, 1000
     for rect in rectangle:
         x1, y1, x2, y2 = rect
-        for x in range(x1, x2 + 1):
-            board[y1 * 2][x * 2] = 1
-            board[y2 * 2][x * 2] = 1
-        for y in range(y1, y2):
-            board[y * 2][x1 * 2] = 1
-            board[y * 2][x2 * 2] = 1
+        for x in range(x1 * 2, x2 * 2 + 1):
+            board[y1 * 2][x] = 1
+            board[y2 * 2][x] = 1
+        for y in range(y1 * 2, y2 * 2 + 1):
+            board[y][x1 * 2] = 1
+            board[y][x2 * 2] = 1
 
-        if y1 < ldy or y1 == ldy and x1 < ldx:
+        if y1 < ldy or (y1 == ldy and x1 < ldx):
             ldy, ldx = y1, x1
 
     ldy *= 2
@@ -31,12 +32,34 @@ def solution(rectangle, characterX, characterY, itemX, itemY):
 
     # outline
     q = deque()
-    q.append([characterY * 2, characterX * 2])
-    here_x, here_y, prev_dir = (
-        characterX * 2,
-        characterY * 2,
-        0,
-    )
+    q.append([ldy, ldx, 0])
+    outline_board[ldy][ldx] = 1
+
+    while q:
+        y, x, dir = q.popleft()
+        for i in [-1, 0, 1, 2]:
+            n_dir = (dir + i) % 4
+            ny = y + dir_y[n_dir]
+            nx = x + dir_x[n_dir]
+            if board[ny][nx] == 1 and outline_board[ny][nx] == 0:
+                outline_board[ny][nx] = 1
+                q.append([ny, nx, dir + i])
+                break
+
+    # bfs
+    q.clear()
+    q.append([characterY * 2, characterX * 2, 0])
+    while q:
+        y, x, d = q.popleft()
+        visited[y][x] = 1
+        if y == itemY * 2 and x == itemX * 2:
+            return d // 2
+
+        for i in range(4):
+            ny = y + dir_y[i]
+            nx = x + dir_x[i]
+            if outline_board[ny][nx] == 1 and visited[ny][nx] == 0:
+                q.append([ny, nx, d + 1])
 
 
 def test_1():
@@ -119,10 +142,10 @@ def test_7():
     print(ans, a)
 
 
-# test_1()
-# test_2()
-# test_3()
-# test_4()
-# test_5()
-# test_6()
+test_1()
+test_2()
+test_3()
+test_4()
+test_5()
+test_6()
 test_7()
