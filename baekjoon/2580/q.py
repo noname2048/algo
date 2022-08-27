@@ -15,7 +15,7 @@ def predata():
 2 5 8 3 9 4 7 6 0"""
 
     def make_gen():
-        yield from s
+        yield from s.splitlines()
 
     closer = make_gen()
 
@@ -25,6 +25,9 @@ def predata():
     return make_iter
 
 
+input = predata()
+
+
 def solve():
     board = []
 
@@ -32,3 +35,63 @@ def solve():
         tmp = map(int, input().split())
         tmp = list(tmp)
         board.append(tmp)
+
+    def get_candidate(y, x):
+        parent = set(range(1, 10))
+
+        for i in range(9):
+            if board[y][i]:
+                parent.discard(board[y][i])
+            if board[i][x]:
+                parent.discard(board[i][x])
+
+        oy = y % 3
+        ox = x % 3
+
+        for dy in range(3):
+            for dx in range(3):
+                ty = oy + dy
+                tx = ox + dx
+                if board[ty][tx]:
+                    parent.discard(board[ty][tx])
+
+        return list(parent)
+
+    find_ = False
+
+    def re(yy, xx):
+        if yy >= 9:
+            return board
+
+        while board[yy][xx] != 0:
+            nx = xx + 1
+            if nx >= 9:
+                nx = 0
+                ny = yy + 1
+            else:
+                ny = yy
+
+            yy = ny
+            xx = nx
+
+        nx = xx + 1
+        if nx >= 9:
+            nx = 0
+            ny = yy + 1
+        else:
+            ny = yy
+
+        if board[yy][xx] == 0:
+            cands = get_candidate(yy, xx)
+
+            for i in cands:
+                board[yy][xx] = i
+                re(ny, nx)
+                if find_:
+                    return
+
+    re(0, 0)
+    print(board)
+
+
+solve()
