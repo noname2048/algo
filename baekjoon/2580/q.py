@@ -118,7 +118,7 @@ def solve():
             if find_ == True:
                 return
 
-        board[y][x] = 0
+        board[here_y][here_x] = 0
 
     re(0)
     for i in range(9):
