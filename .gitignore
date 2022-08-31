@@ -1,3 +1,11 @@
+# pyenv, poetry
+.python-version
+poetry.*
+pyproject.toml
+
+# jupyter research tmp files
+/*.ipynb
+
 # logging for debug
 log.txt
 # pycache
