@@ -19,6 +19,14 @@ units = dict((s, [u for u in unitlist if s in u]) for s in squares)
 peers = dict((s, set(sum(units[s], [])) - set([s])) for s in squares)
 
 
+def grid_values(board):
+    chars = []
+    for l in board:
+        temp = [c for c in l if c in digits or c in "0."]
+        chars += temp
+    return dict(zip(squares, chars))
+
+
 def parse_grid(board):
     values = dict((s, digits) for s in squares)
     for s, d in grid_values(board).items():
