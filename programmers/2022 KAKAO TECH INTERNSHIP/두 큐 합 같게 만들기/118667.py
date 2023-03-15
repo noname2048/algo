@@ -1,3 +1,14 @@
+from dataclasses import dataclass
+
+@dataclass
+class Q1:
+    queue1 = [3, 2, 7, 2]
+    queue2 = [4, 6, 5, 1]
+
+def solve():
+    p = Q1
+    solution(p.queue1, p.queue2)
+
 def solution(queue1, queue2):
     answer = -2
     return answer
@@ -13,7 +24,9 @@ def inner_solution(q1, q2):
 
     ans = -1
 
+    for_debug = []
     def update_ans(num: int) -> None:
+        for_debug.append(num)
         if ans == -1 or num < ans:
             ans = num
 
@@ -27,43 +40,23 @@ def inner_solution(q1, q2):
             s -= q3[i]
             i += 1
         elif s == half:
+            if j < l1:
+                update_ans(j + l2 + i)
+            if j == l1:
+                update_ans(i)
+            if j < l2:
+                if i < l1:
+                    update_ans(i + j - l1)
+                elif i >= l1:
+                    update_ans((j - l1) + l1 + (i - l1))
+            if j == l2:
+                if i < l1:
+                    update_ans(i + l2)
+                elif i >= l1:
+                    update_ans(i - l1)
             #
             s -= q3[i]
             i += 1
         else:
             break
 
-    def scan(local_i, local_j, local_s):
-        if local_s < half:
-            if local_j == l3:
-                return
-            local_j += 1
-            half += q3[local_j]
-        elif local_s > half:
-            if local_j == l3:
-                return
-            half -= q3[local_i]
-            local_i += 1
-        else:
-            if local_i < l1 and local_j < l1:
-                if local_j == l1 - 1:
-                    answer.append(local_i)
-                else:
-                    answer.append(l2 + local_j)
-            elif local_i < l1 and local_j >= l1:
-                if local_j == l3 - 1:
-                    answer.append(local_i)
-                else:
-                    answer.append(local_i + (local_j - l1))
-            else:
-                if local_j == l3 - 1:
-                    answer.append(local_i - l1)
-                else:
-                    answer.append(local_i)
-            local_i += 1
-            s -= q3[local_i - 1]
-
-    scan(0, 0, 0)
-    q1, q2 = q2, q1
-    i, j, s = 0, 0, 0
-    scan(0, 0, 0)
