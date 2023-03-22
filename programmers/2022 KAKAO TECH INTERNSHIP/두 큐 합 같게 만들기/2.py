@@ -15,8 +15,9 @@ def solution(queue1, queue2):
     answer = 0
 
     while True:
-        if s > len(queue1) + len(queue2):
+        if s >= len(queue1) + len(queue2):
             return -1
+
         elif k < half:
             k += queue3[e]
             e += 1
