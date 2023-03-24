@@ -79,7 +79,8 @@ def re(x, y):
     f.write(f"---{x:3d}---{y:3d}---{local_min:4d}\n")
     for i in range(start_alp, target_alp + 1):
         line = (
-            "  ".join(f"{int(num):3d}" for num in cache[i][start_cop:target_cop + 1]) + "\n"
+            "  ".join(f"{int(num):3d}" for num in cache[i][start_cop : target_cop + 1])
+            + "\n"
         )
         f.write(line)
     f.write("\n")
@@ -107,4 +108,22 @@ Q2 = {
     ],
 }
 
-solution(**Q2)
+Q3 = {
+    "alp": 0,
+    "cop": 0,
+    "problems": [
+        [0, 0, 1, 1, 1],
+        [150, 150, 1, 1, 150],
+    ],
+}
+
+Q4 = {
+    "alp": 0,
+    "cop": 0,
+    "problems": [
+        [4, 3, 1, 1, 150],
+        [0, 0, 2, 2, 1],
+    ],
+}
+
+solution(**Q4)
