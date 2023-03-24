@@ -1,32 +1,43 @@
+from datetime import datetime, timedelta, timezone
+
+KST = timezone(offset=timedelta(hours=9))
+
+
 cache = []
 g_problems = []
-mx_alp = 0
-mx_cop = 0
+start_alp = 0
+target_alp = 0
+start_cop = 0
+target_cop = 0
+
+f = open(f"{datetime.now(tz=KST).strftime('%d-%H-%M-%S')}.txt", "+w", encoding="utf-8")
+
 
 def solution(alp, cop, problems):
     global cache
     global g_problems
-    global mx_alp
-    global mx_cop
-
-    basic_problem = [[0, 0, 0, 1, 1], [0, 0, 1, 0, 1]]
-    g_problems.extend(basic_problem)
-    g_problems.extend(problems)
-    cache = [[-1] * 151 for _ in range(151)]
-
-    mx_alp = 0
-    mx_cop = 0
+    global start_alp, target_alp
+    global start_cop, target_cop
 
     for problem in problems:
         rq_alp = problem[0]
         rq_cop = problem[1]
 
-        if mx_alp < rq_alp:
-            mx_alp = rq_alp
-        if mx_cop < rq_cop:
-            rq_cop = rq_cop
+        if target_alp < rq_alp:
+            target_alp = rq_alp
+        if target_cop < rq_cop:
+            target_cop = rq_cop
 
-    answer = re(mx_alp, mx_cop)
+    start_alp = alp
+    start_cop = cop
+
+    basic_problem = [[0, 0, 0, 1, 1], [0, 0, 1, 0, 1]]
+    g_problems.extend(basic_problem)
+    g_problems.extend(problems)
+    cache = [[-1] * 151 for _ in range(151)]
+    cache[target_alp][target_cop] = 0
+
+    answer = re(start_alp, start_cop)
     print(answer)
     return answer
 
@@ -35,10 +46,10 @@ def re(x, y):
     """재귀"""
     global cache
     global g_problems
-    global mx_alp
-    global mx_cop
+    global start_alp, target_alp
+    global start_cop, target_cop
 
-    if not 0 <= x <= 150 or not 0 <= y <= 150:
+    if not start_alp <= x <= target_alp or not start_cop <= y <= target_cop:
         return float("inf")
 
     if cache[x][y] != -1:
@@ -46,24 +57,33 @@ def re(x, y):
 
     local_min = float("inf")
     for problem in g_problems:
-        problem_alp = problem[0]
-        problem_cop = problem[1]
-        reward_alp = problem[2]
-        reward_cop = problem[3]
-        problem_cost = problem[4]
+        rq_alp = problem[0]
+        rq_cop = problem[1]
+        rw_alp = problem[2]
+        rw_cop = problem[3]
+        cost = problem[4]
 
-        if x < problem_alp or y < problem_cop:
+        if x < rq_alp or y < rq_cop:
             continue
 
-        new_cost = re(x + reward_alp, y + reward_cop) + problem_cost
+        new_cost = re(x + rw_alp, y + rw_cop) + cost
         if new_cost < local_min:
             local_min = new_cost
-    
-    with open(f"log/{x:03d}_{y:03d}.txt", mode="w+") as f:
-        for i in range(mx_alp)
-        f.write(f"{num:03d}" for num in cache[x])       
+
+    # with open(f"log/{x:03d}_{y:03d}.txt", mode="w+") as f:
+    #     for i in range(mx_alp)
+    #     f.write(f"{num:03d}" for num in cache[x])
 
     cache[x][y] = local_min
+
+    f.write(f"---{x:3d}---{y:3d}---{local_min:4d}\n")
+    for i in range(start_alp, target_alp + 1):
+        line = (
+            "  ".join(f"{int(num):3d}" for num in cache[i][start_cop:target_cop + 1]) + "\n"
+        )
+        f.write(line)
+    f.write("\n")
+
     return cache[x][y]
 
 
@@ -87,4 +107,4 @@ Q2 = {
     ],
 }
 
-solution(**Q1)
+solution(**Q2)
