@@ -1,3 +1,4 @@
+# 13 부터 25까지 시간초과 혹은 런타임 에러
 from collections import defaultdict
 
 
