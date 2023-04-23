@@ -1,9 +1,9 @@
-# pypy3 -> wrong
+# N < L 인 경우 고려 ?
 from itertools import accumulate
 import math
 import sys
 
-sys.stdin = open("p4.txt", "r")
+sys.stdin = open("p5.txt", "r")
 input = sys.stdin.readline
 
 
@@ -19,7 +19,7 @@ def main():
     cola_array = list(accumulate(cola_array))
 
     effect = [0] * n
-    for i in range(l):
+    for i in range(max(l, n)):
         effect[i] = cola_array[i]
     for i in range(l, n):
         effect[i] = cola_array[i] - cola_array[i - l]

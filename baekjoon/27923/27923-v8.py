@@ -1,9 +1,9 @@
-# pypy3 -> wrong
+# max -> min 으로 교체후 풀이 완료
 from itertools import accumulate
 import math
 import sys
 
-sys.stdin = open("p4.txt", "r")
+sys.stdin = open("p5.txt", "r")
 input = sys.stdin.readline
 
 
@@ -19,7 +19,7 @@ def main():
     cola_array = list(accumulate(cola_array))
 
     effect = [0] * n
-    for i in range(l):
+    for i in range(min(l, n)):
         effect[i] = cola_array[i]
     for i in range(l, n):
         effect[i] = cola_array[i] - cola_array[i - l]
@@ -27,7 +27,7 @@ def main():
     effect.sort(reverse=True)
     m.sort(reverse=True)
 
-    caps = [math.floor(mi / (2**ei)) for mi, ei in zip(m, effect)]
+    caps = [math.floor(m[i] / (2**effect[i])) for i in range(n)]
     answer = sum(caps)
     print(answer)
 
