@@ -5,9 +5,9 @@ import math
 input = sys.stdin.readline
 
 def main():
-    n, k, l = list(map(int, input().rstrip().split()))
-    m = list(map(int, input().rstrip().split()))
-    t = list(map(int, input().rstrip().split()))
+    n, k, l = list(map(int, input().split()))
+    m = list(map(int, input().split()))
+    t = list(map(int, input().split()))
 
     # effective of cola
     cola = list(map(lambda x: [0, x], range(n + l + 1)))
