@@ -22,3 +22,12 @@ a, b, c = map(int, input().split())
 # a 를 기준으로 bfs, b 를 기준으로 bfs
 # c 를 기준으로 bfs 를 펼처 거리를 기록한다.
 # 리프노드까지 a < b, c 면 탈출 성공
+
+def bfs(start, cache):
+    """start -> bfs recode with cache
+    
+    example: bfs(0, mem)
+    """
+    global tree
+    
+    mem = []
