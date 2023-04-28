@@ -23,11 +23,22 @@ a, b, c = map(int, input().split())
 # c 를 기준으로 bfs 를 펼처 거리를 기록한다.
 # 리프노드까지 a < b, c 면 탈출 성공
 
-def bfs(start, cache):
+def bfs(start, tree):
     """start -> bfs recode with cache
     
     example: bfs(0, mem)
     """
-    global tree
+    cache = [-1] * len(tree)
+    queue = [(start, 0)]
     
-    mem = []
+    while queue:
+        here, dist = queue.pop()
+        cache[here] = dist
+        for next in tree[here]:
+            if cache == -1 and next not in queue:
+                queue.append((next, (dist + 1)))
+    return cache
+
+a_c = bfs(a, tree)
+b_c = bfs(b, tree)
+c_c = bfs(c, tree)
