@@ -1,12 +1,15 @@
 from collections import defaultdict
+import sys
 
+sys.stdin = open("p1.txt", "r")
 
+BIG = 900_000
 N = int(input())
-conn = defaultdict(dict)
-for _ in range(N):
+connection = defaultdict(dict)
+for _ in range(N - 1):
     x, y = map(int, input().split())
-    conn[x][y] = True
-    conn[y][x] = True
+    connection[x][y] = True
+    connection[y][x] = True
 
 a, b, c = map(int, input().split())
 # 어떻게 해야하지
@@ -23,22 +26,45 @@ a, b, c = map(int, input().split())
 # c 를 기준으로 bfs 를 펼처 거리를 기록한다.
 # 리프노드까지 a < b, c 면 탈출 성공
 
-def bfs(start, tree):
+def bfs(N, BIG, start, tree):
     """start -> bfs recode with cache
     
     example: bfs(0, mem)
     """
-    cache = [-1] * len(tree)
-    queue = [(start, 0)]
+    cache = [BIG] * (N + 1)
+    queue = [(start, 0)] # pair(node, dist)
     
     while queue:
         here, dist = queue.pop()
         cache[here] = dist
-        for next in tree[here]:
-            if cache == -1 and next not in queue:
+        for next in tree[here].keys():
+            if cache[next] == BIG and next not in queue:
                 queue.append((next, (dist + 1)))
+
     return cache
 
-a_c = bfs(a, tree)
-b_c = bfs(b, tree)
-c_c = bfs(c, tree)
+def search_leaf_node(N, tree):
+    answer = []
+    for k, v in tree.items():
+        if len(v) == 1:    
+            answer.append(k)
+
+    return answer
+
+leaf_node = search_leaf_node(N, connection)
+a_cache = bfs(N, BIG, a, connection)
+b_cache = bfs(N, BIG, b, connection)
+c_cache = bfs(N, BIG, c, connection)
+
+if a in leaf_node:
+    print("YES")
+else:
+    success = False
+    for i in leaf_node:
+        if a_cache[i] < b_cache[i] and a_cache[i] < c_cache[i]:
+            success = True
+
+    if success:
+        print("YES")
+    else:
+        print("NO")
