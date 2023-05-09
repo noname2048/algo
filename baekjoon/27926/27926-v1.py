@@ -16,7 +16,7 @@
 import sys
 from collections import defaultdict
 
-sys.stdin = open("p1.txt", "r")
+sys.stdin = open("p2.txt", "r")
 input = lambda: sys.stdin.readline().rstrip()
 
 
@@ -30,20 +30,29 @@ def main():
 
     cost = 0
     visited = {}
-    cache = {}
-    conn = 0
     for u in edges.keys():
-        cost = max(cost, get_cost(u, visited, cache, conn))
+        visited[u] = True
+        cost = max(cost, get_cost(edges, u, visited, 1))
+        del visited[u]
+    
+    print(cost)
 
 # 연결될 수 있는 시너지 한에서만 모두 고려해보자
-def get_cost(here, visited, cache, conn):
+def get_cost(graph, here, visited, conn):
     # 현제 연결된 수 4개 이상
-    if conn > 4:
+    if conn >= 4:
         return 0
-    cache = {}
-    global synergy_arr
-    next = synerge_candidate[0]
-    if cache[next] > 2 and cache[start] > 2:
-        return 0
-    else:
-        get_cost(here, visited, cache, conn)
+
+    cost = 0
+    for next in graph[here]:
+        if next not in visited:
+            visited[next] = True
+            d = graph[here][next]
+            new_cost = get_cost(graph, next, visited, conn + 1 )
+            cost = max(cost, new_cost + d) 
+            del visited[next]
+        
+    return cost
+
+
+main()
