@@ -11,39 +11,65 @@ def main():
     for _ in range(m):
         u, v, d = list(map(int, input().split()))
         edges.append((u, v, d))
-    answer = solve(n, m, edges)
+    answer = solve01(edges)
+    answer = max(answer, solve02(n, m, edges))
     print(answer)
 
-class Buffer:
-    def __init__(self, size):
-        self.size = size
-        self.buffer = [None] * size
-        self.idx = 0
-    
-    def push(self, item):
-        self.buffer[self.idx] = item
-        self.idx = (self.idx + 1) % self.size
-
-    @property
-    def all(self):
-        return self.buffer
-
-def solve(n, m, edges):
+def solve01(edges):
     # case 01
-    buffer = Buffer(2)
-    temp_max = -1
+    poped = {}
     for _ in range(2):
-        for u, v, d in edges:
-            if temp_max < d:
+        temp_max = -1
+        temp_idx = -1
+        for idx, edge in enumerate(edges):
+            _, _, d = edge
+            if temp_max < d and idx not in poped:
                 temp_max = d
-                buffer.push(d)            
-    answer = sum(buffer.all)
-    
+                temp_idx = idx
+        poped[temp_idx] = temp_max
+    answer = sum(poped.values())
+    return answer
+
+def solve02(n, m, edges):
     # case 02
     edge_dict = defaultdict(dict)
-    for u, v, d in edges:
-        edge_dict[u][v] = d
-        edge_dict[v][u] = d
+    for idx, edge in edges:
+        u, v, d = edge
+        edge_dict[u] = (idx, d)
+        edge_dict[v] = (idx, d)
+
+    for idx, edge in enumerate(edges):
+        # 정점 u 에서 v 를 제외하고 간선이 1개 이상인가
+        a, b, d = edge
+        a_dict = {k: v for k, v in edge_dict[u].items() if k != b}
+        b_dict = {k: v for k, v in edge_dict[v].items() if k != a}
+        a_dict = sorted(a_dict)
+        b_dict = sorted(b_dict)
+
+
+        edge_candidate = set()
+        for i, d, in edge_dict[u]:
+            if i != idx:
+                edge_candidate.add((i, d))
+            
+        for j, d in edge_dict[v]:
+            if j != idx:
+                edge_candidate.add((j, d))
+
+
+        edge_candidate = set()
+        for i, d in edge_dict[u]:
+            edge_candidate.add((i, d))
+        for j, u, d in edge_dict[v]:
+            edge_candidate.add((j, d))
+        edge_candidate.remove((idx, edge[2]))
+
+        # 간선이 사이클을 이루는 경우 밖에 없는 경우 제외
+        if len(edge_candidate) < 2:
+            continue
+
+        # 
+
 
     for node in edge_dict.keys():
         edge_dict[node] = dict(sorted(edge_dict[node].items(), key=lambda x: x[1], reverse=True))
