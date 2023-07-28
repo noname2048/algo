@@ -1,1 +1,5 @@
+// to ignore v1 (when compile v1.rs)
+*
+!*.*
+// to ignore java compile output
 *.class
